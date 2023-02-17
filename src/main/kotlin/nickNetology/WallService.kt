@@ -10,14 +10,14 @@ object WallService {
     }
 
     fun add(post: Post): Post {
-        posts += post.copy(id = ++lastPostId, likes = post.likes.copy(), reposts = post.reposts.copy())
+        posts += post.copy(id = ++lastPostId, likes = post.likes?.copy(), reposts = post.reposts?.copy())
         return posts.last()
     }
 
     fun update(newPost: Post): Boolean {
         for ((id, post) in posts.withIndex()) {
             if (post.id == newPost.id) {
-                posts[id] = newPost.copy(likes = newPost.likes.copy(), reposts = newPost.reposts.copy())
+                posts[id] = newPost.copy(likes = newPost.likes?.copy(), reposts = newPost.reposts?.copy())
                 return true
             }
         }
