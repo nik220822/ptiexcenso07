@@ -1,141 +1,106 @@
 package nickNetology
 
-open class Attachment(
-    val type: String? = null,
-    open val id: Int? = null,
-    open val ownerId: Int? = null,
-    open val artist: String? = null,
-    open val title: String? = null,
-    open val duration: Int? = null,
-    open val url: String? = null,
-    open val lyricsId: Int? = null,
-    open val albumId: Int? = null,
-    open val genreId: Int? = null,
-    open val date: Int? = null,
-    open val noSearch: Boolean? = null,
-    open val photo_130: String? = null,
-    open val photo_604: String? = null,
-    open val caption: String? = null,
-    open val description: String? = null,
-    open val isExternal: Int? = null,
-    open val previewPage: Nothing? = null,
-    open val previewUrl: String? = null,
-    open val groupId: Int? = null,
-    open val creatorId: Int? = null,
-    open val whoCanView: Int? = null,
-    open val whoCanEdit: Int? = null,
-    open val edited: Int? = null,
-    open val created: Int? = null,
-    open val editorId: Int? = null,
-    open val views: Int? = null,
-    open val parent: String? = null,
-    open val parent2: String? = null,
-    open val source: String? = null,
-    open val html: String? = null,
-    open val viewUrl: String? = null,
-    open val currentUserCanEdit: Int? = null,
-    open val currentUserCanEditAccess: Int? = null
-)
+sealed class Attachment(val type: String)
 
-class Graffiti() : Attachment(type = "Graffiti") {
-    class GraffitiAttachment() : Attachment(type = "Graffiti") {
-        override val id = null
-        override val ownerId = null
-        override val artist = null
-        override val title = null
-        override val duration = null
-        override val url = null
-        override val lyricsId = null
-        override val albumId = null
-        override val genreId = null
-        override val date = null
-        override val noSearch = null
-        override val photo_130 = null
-        override val photo_604 = null
-        override val caption = null
-        override val description = null
-        override val isExternal = null
-        override val previewPage = null
-        override val previewUrl = null
-        override val groupId = null
-        override val creatorId = null
-        override val whoCanView = null
-        override val whoCanEdit = null
-        override val edited = null
-        override val created = null
-        override val editorId = null
-        override val views = null
-        override val parent = null
-        override val parent2 = null
-        override val source = null
-        override val html = null
-        override val currentUserCanEdit = null
-        override val currentUserCanEditAccess = null
+class Graffiti() : Attachment("Graffiti") {
+    class GraffitiAttachment() : Attachment("Graffiti") {
+        val id = null
+        val ownerId = null
+        val artist = null
+        val title = null
+        val duration = null
+        val url = null
+        val lyricsId = null
+        val albumId = null
+        val genreId = null
+        val date = null
+        val noSearch = null
+        val photo_130 = null
+        val photo_604 = null
+        val caption = null
+        val description = null
+        val isExternal = null
+        val previewPage = null
+        val previewUrl = null
+        val groupId = null
+        val creatorId = null
+        val whoCanView = null
+        val whoCanEdit = null
+        val edited = null
+        val created = null
+        val editorId = null
+        val views = null
+        val parent = null
+        val parent2 = null
+        val source = null
+        val html = null
+        val currentUserCanEdit = null
+        val currentUserCanEditAccess = null
     }
 }
 
-class Link() : Attachment(type = "Link") {
-    class LinkAttachment() : Attachment(type = "Link") {
-        override val title = null
-        override val url = null
-        override val caption = null
-        override val description = null
-        override val isExternal = null
-        override val previewPage = null
-        override val previewUrl = null
+class Link() : Attachment("Link") {
+    class LinkAttachment() : Attachment("Link") {
+        val title = null
+        val url = null
+        val caption = null
+        val description = null
+        val isExternal = null
+        val previewPage = null
+        val previewUrl = null
     }
 }
 
-class WikiPage() : Attachment(type = "WikiPage") {
-    class WikiPageAttachment() : Attachment(type = "WikiPage") {
-        override val id = null
-        override val title = null
-        override val groupId = null
-        override val creatorId = null
-        override val whoCanView = null
-        override val whoCanEdit = null
-        override val edited = null
-        override val created = null
-        override val editorId = null
-        override val views = null
-        override val parent = null
-        override val parent2 = null
-        override val source = null
-        override val html = null
-        override val viewUrl = null
-        override val currentUserCanEdit = null
-        override val currentUserCanEditAccess = null
+class WikiPage() : Attachment("WikiPage") {
+    class WikiPageAttachment() : Attachment("WikiPage") {
+        val id = null
+        val title = null
+        val groupId = null
+        val creatorId = null
+        val whoCanView = null
+        val whoCanEdit = null
+        val edited = null
+        val created = null
+        val editorId = null
+        val views = null
+        val parent = null
+        val parent2 = null
+        val source = null
+        val html = null
+        val viewUrl = null
+        val currentUserCanEdit = null
+        val currentUserCanEditAccess = null
     }
 }
 
-class MarketItem() : Attachment(type = "MarketItem") {
-    class MarketItemAttachment() : Attachment(type = "MarketItem") {
-        override val id = null
-        override val ownerId = null
-        override val title = null
-        override val date = null
-        override val description = null
+class MarketItem() : Attachment("MarketItem") {
+    class MarketItemAttachment() : Attachment("MarketItem") {
+        val id = null
+        val ownerId = null
+        val title = null
+        val date = null
+        val description = null
     }
 }
 
-class Sticker() : Attachment(type = "Sticker") {
-    class StickerAttachment() : Attachment(type = "Sticker") {
-        override val id = null
-        override val title = null
-        override val groupId = null
-        override val creatorId = null
-        override val whoCanView = null
-        override val whoCanEdit = null
-        override val edited = null
-        override val created = null
-        override val editorId = null
-        override val views = null
-        override val parent = null
-        override val parent2 = null
-        override val source = null
-        override val html = null
-        override val viewUrl = null
-        override val currentUserCanEdit = null
-        override val currentUserCanEditAccess = null
+class Sticker() : Attachment("Sticker") {
+    class StickerAttachment() : Attachment("Sticker") {
+        val id = null
+        val title = null
+        val groupId = null
+        val creatorId = null
+        val whoCanView = null
+        val whoCanEdit = null
+        val edited = null
+        val created = null
+        val editorId = null
+        val views = null
+        val parent = null
+        val parent2 = null
+        val source = null
+        val html = null
+        val viewUrl = null
+        val currentUserCanEdit = null
+        val currentUserCanEditAccess = null
     }
 }
