@@ -17,7 +17,7 @@ data class Post(
     val views: Any? = null,
     val postType: String? = null,
     val postSourse: Any? = null,
-    val geo: Any?=null,
+    val geo: Any? = null,
     val signerId: Int? = null,
     val copyHistory: Array<Post>? = null,
     val canPin: Boolean = false,
@@ -27,5 +27,6 @@ data class Post(
     val markedAsAds: Boolean = false,
     val isFavorite: Boolean = false,
     val postponedId: Int? = null,
-    val original: Post? = null
+    val original: Post? = null,
+    val attachments: Array<Attachment>? = null
 )
