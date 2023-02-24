@@ -2,8 +2,8 @@ package nickNetology
 
 sealed class Attachment(val type: String)
 
-class Graffiti() : Attachment("Graffiti") {
-    class GraffitiAttachment() : Attachment("Graffiti") {
+class GraffitiAttachment() : Attachment("Graffiti") {
+    class Graffiti() {
         val id = null
         val ownerId = null
         val artist = null
@@ -39,8 +39,8 @@ class Graffiti() : Attachment("Graffiti") {
     }
 }
 
-class Link() : Attachment("Link") {
-    class LinkAttachment() : Attachment("Link") {
+class LinkAttachment() : Attachment("Link") {
+    class Link() {
         val title = null
         val url = null
         val caption = null
@@ -51,8 +51,8 @@ class Link() : Attachment("Link") {
     }
 }
 
-class WikiPage() : Attachment("WikiPage") {
-    class WikiPageAttachment() : Attachment("WikiPage") {
+class WikiPageAttachment() : Attachment("WikiPage") {
+    class WikiPage() {
         val id = null
         val title = null
         val groupId = null
@@ -73,8 +73,8 @@ class WikiPage() : Attachment("WikiPage") {
     }
 }
 
-class MarketItem() : Attachment("MarketItem") {
-    class MarketItemAttachment() : Attachment("MarketItem") {
+class MarketItemAttachment() : Attachment("MarketItem") {
+    class MarketItem() {
         val id = null
         val ownerId = null
         val title = null
@@ -83,8 +83,8 @@ class MarketItem() : Attachment("MarketItem") {
     }
 }
 
-class Sticker() : Attachment("Sticker") {
-    class StickerAttachment() : Attachment("Sticker") {
+class StickerAttachment() : Attachment("Sticker") {
+    class Sticker() {
         val id = null
         val title = null
         val groupId = null
