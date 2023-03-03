@@ -4,7 +4,7 @@ object WallService {
     var posts = emptyArray<Post>()
     private var lastPostId: Int = 0
     var comments = emptyArray<Comment>()
-    private var lastCommentId: Int = 0
+    var lastCommentId: Int = 0
     var reportComments = emptyArray<Comment>()
     private var lastReportCommentId: Int = 0
 
@@ -42,44 +42,6 @@ object WallService {
                 }
             }
         }
-    }
-
-    fun printWithCommentsInPostVer2() { //другой вариант
-        for (post in posts) {
-            println(post)
-            post.comments?.forEach { comment ->
-                comment.print()
-            }
-        }
-    }
-
-    fun printWithCommentsInPost() {
-        for (post in posts) {
-            println(post)
-            for (comment in post.comments!!) {
-                comment.print()
-//            post.comments?.get(1)?.print()
-            }
-        }
-    }
-
-    fun createCommentVer3(id: Int, comment: Comment): Comment? {//Непонятно, почему не работает
-        for ((thisId, comments) in posts) {
-            if (id == thisId) {
-//                comments += comment
-//                return comments.last()
-            }
-        }
-        return throw PostNotFoundException("Post with id = $id was not found")
-    }
-
-    fun createCommentVer2(id: Int, comment: Comment): Comment? {
-        if (foundById(id)) {
-            posts[id - 1].comments = posts[id - 1].comments?.plus(comment)
-//            posts[id-1].comments += comment//Непонятно почему так нельзя
-            return posts[id - 1].comments?.last()
-        }
-        return throw PostNotFoundException("Post with id = $id was not found")
     }
 
     fun createComment(commentPostId: Int, comment: Comment): Comment {
