@@ -21,12 +21,11 @@ class Tests {
         WallService.add(post3)//id=3
         val theCommentPostId = 1
         val comment = Comment(theCommentPostId)
-        if (WallService.foundById(theCommentPostId)) {
-            WallService.comments += comment.copy(id = ++WallService.lastCommentId)
-            result = WallService.comments.last()
-        } else throw PostNotFoundException("Post with id = $theCommentPostId was not found")
+        WallService.createComment(theCommentPostId, comment)
+        result = WallService.comments.last()
         assertEquals(comment, result)
     }
+
     @Test(expected = PostNotFoundException::class)
     fun revisionNotOK() {
         val post1 = Post()
@@ -37,10 +36,9 @@ class Tests {
         WallService.add(post3)//id=3
         val theCommentPostId = 4
         val comment = Comment(theCommentPostId)
-        if (WallService.foundById(theCommentPostId)) {
-            WallService.comments += comment.copy(id = ++WallService.lastCommentId)
-        } else throw PostNotFoundException("Post with id = $theCommentPostId was not found")
+        WallService.createComment(theCommentPostId, comment)
     }
+
     @Test
     fun testAdd() {
         val result = WallService.add(Post()).id
@@ -87,111 +85,31 @@ class Tests {
         assertEquals(comment, WallService.comments.last())
     }
 
+    @Test(expected = CommentNotFoundException::class)
+    fun reportCommentCommentNotFoundException() {
+        val reason = 5
+        val post1 = Post()
+        WallService.add(post1)//id=1
+        WallService.createComment(commentPostId = 1, Comment(text = "text for comment for post 1"))//id=1
+        WallService.createReportComment(commentId = 10, reason = reason)
+    }
+
     @Test(expected = NotCorrectReason::class)
     fun reportCommentThrowReasonIncorrect() {
-        val id = 1
         val reason = 9
         val post1 = Post()
-        WallService.add(post1)
-        WallService.createComment(commentPostId = 1, Comment(text = "text for comment for post 1"))
-        if (WallService.foundCommentById(id)) {
-            WallService.addReportComment(id)
-            when (reason) {
-                0 -> {
-                    println("в комменте $id спам")
-                }
-
-                1 -> {
-                    println("в комменте $id детская порнография")
-                }
-
-                2 -> {
-                    println("в комменте $id экстремизм")
-                }
-
-                3 -> {
-                    println("в комменте $id насилие")
-                }
-
-                4 -> {
-                    println("в комменте $id пропаганда наркотиков")
-                }
-
-                5 -> {
-                    println("в комменте $id материал для взрослых")
-                }
-
-                6 -> {
-                    println("в комменте $id оскорбление")
-                }
-
-                7 -> {
-                    println("в комменте $id призывы к суициду")
-                }
-
-                else -> {
-                    throw NotCorrectReason("the given reason ($reason) is incorrect")
-                }
-            }
-        }
+        WallService.add(post1)//id=1
+        WallService.createComment(commentPostId = 1, Comment(text = "text for comment for post 1"))//id=1
+        WallService.createReportComment(commentId = 1, reason = reason)
     }
 
     @Test
-    fun reportCommentReturnInt() {
-        var result: Int = 0
-        val id = 1
+    fun reportCommentOK() {
         val reason = 7
         val post1 = Post()
         WallService.add(post1)
         WallService.createComment(commentPostId = 1, Comment(text = "text for comment for post 1"))
-        if (WallService.foundCommentById(id)) {
-            WallService.addReportComment(id)
-            when (reason) {
-                0 -> {
-                    println("в комменте $id спам")
-                    result = 1
-                }
-
-                1 -> {
-                    println("в комменте $id детская порнография")
-                    result = 1
-                }
-
-                2 -> {
-                    println("в комменте $id экстремизм")
-                    result = 1
-                }
-
-                3 -> {
-                    println("в комменте $id насилие")
-                    result = 1
-                }
-
-                4 -> {
-                    println("в комменте $id пропаганда наркотиков")
-                    result = 1
-                }
-
-                5 -> {
-                    println("в комменте $id материал для взрослых")
-                    result = 1
-                }
-
-                6 -> {
-                    println("в комменте $id оскорбление")
-                    result = 1
-                }
-
-                7 -> {
-                    println("в комменте $id призывы к суициду")
-                    result = 1
-                }
-
-                else -> {
-                    throw NotCorrectReason("the given reason ($reason) is incorrect")
-                }
-            }
-        }
+        var result = WallService.createReportComment(commentId = 1, reason = reason)
         assertEquals(1, result)
     }
 }

@@ -1,17 +1,17 @@
 package nickNetology
 
 object WallService {
+    var listOfReportComments = mutableListOf<ReportComment>()
     var posts = emptyArray<Post>()
     private var lastPostId: Int = 0
     var comments = emptyArray<Comment>()
     var lastCommentId: Int = 0
-    var reportComments = emptyArray<Comment>()
     private var lastReportCommentId: Int = 0
 
     fun clear() {
         posts = emptyArray()
         comments = emptyArray()
-        reportComments = emptyArray()
+        listOfReportComments = mutableListOf()//чищу мутаблЛист
         lastPostId = 0// также здесь нужно сбросить счетчик для id постов, если он у вас используется
         lastCommentId = 0
         lastReportCommentId = 0
@@ -61,47 +61,48 @@ object WallService {
         return false
     }
 
-    fun reportComment(id: Int, reason: Int): Int {
-        if (foundCommentById(id)) {
-            addReportComment(id)
+    fun createReportComment(commentId: Int, reason: Int): Int {
+        if (foundCommentById(commentId)) {
+            val reportComment = ReportComment(id = ++lastReportCommentId, commentId = commentId)
+            listOfReportComments.add(reportComment)
             when (reason) {
                 0 -> {
-                    println("в комменте $id спам")
+                    println("в комменте $commentId спам")
                     return 1
                 }
 
                 1 -> {
-                    println("в комменте $id детская порнография")
+                    println("в комменте $commentId детская порнография")
                     return 1
                 }
 
                 2 -> {
-                    println("в комменте $id экстремизм")
+                    println("в комменте $commentId экстремизм")
                     return 1
                 }
 
                 3 -> {
-                    println("в комменте $id насилие")
+                    println("в комменте $commentId насилие")
                     return 1
                 }
 
                 4 -> {
-                    println("в комменте $id пропаганда наркотиков")
+                    println("в комменте $commentId пропаганда наркотиков")
                     return 1
                 }
 
                 5 -> {
-                    println("в комменте $id материал для взрослых")
+                    println("в комменте $commentId материал для взрослых")
                     return 1
                 }
 
                 6 -> {
-                    println("в комменте $id оскорбление")
+                    println("в комменте $commentId оскорбление")
                     return 1
                 }
 
                 7 -> {
-                    println("в комменте $id призывы к суициду")
+                    println("в комменте $commentId призывы к суициду")
                     return 1
                 }
 
@@ -110,7 +111,7 @@ object WallService {
                 }
             }
         }
-        return throw CommentNotFoundException("Comment with id = $id was not found")
+        return throw CommentNotFoundException("Comment with id = $commentId was not found")
     }
 
     fun foundCommentById(commentId: Int): Boolean {
@@ -120,11 +121,5 @@ object WallService {
             }
         }
         return false
-    }
-
-    fun addReportComment(commentId: Int): Comment {
-        val comment = comments[commentId - 1]
-        reportComments += comment.copy(id = ++lastReportCommentId)
-        return reportComments.last()
     }
 }

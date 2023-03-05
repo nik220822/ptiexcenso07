@@ -1,5 +1,12 @@
 package nickNetology
 
+data class ReportComment(
+    val id: Int? = null,
+    val ownerId: Int? = null,
+    val commentId: Int? = null,
+    val reason: String? = null
+)
+
 data class Post(
     var id: Int = 0,
     var comments: Array<Comment>? = null,
