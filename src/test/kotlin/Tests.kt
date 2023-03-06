@@ -67,21 +67,16 @@ class Tests {
         val comment = Comment(commentPostId = commentPostId)
         val post1 = Post()
         WallService.add(post1)
-        if (WallService.foundById(commentPostId)) {
-            WallService.comments += comment
-        } else throw PostNotFoundException("Post with id = $commentPostId was not found")
-        // здесь код с вызовом функции, которая должна выкинуть PostNotFoundException
+        WallService.createComment(commentPostId, comment)
     }
 
     @Test
     fun shouldReturnComment() {
         val commentPostId = 1
-        val comment = Comment(commentPostId = commentPostId)
+        val comment = Comment(id = 1, commentPostId = commentPostId)
         val post1 = Post()
         WallService.add(post1)
-        if (WallService.foundById(commentPostId)) {
-            WallService.comments += comment
-        } else throw PostNotFoundException("Post with id = $commentPostId was not found")
+        WallService.createComment(commentPostId, comment)
         assertEquals(comment, WallService.comments.last())
     }
 
